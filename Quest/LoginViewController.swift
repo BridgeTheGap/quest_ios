@@ -51,51 +51,25 @@ class LoginViewController: UIViewController {
             return
         }
         
-        let dataTask = self.dataTaskWithUsername(usernameField.text!, password: passwordField.text!, remember: true)
-        if let task = dataTask {
-            task.resume()
-        }
-    }
-    
-    // MARK: NSURLSession
-    func dataTaskWithUsername(username: String, password: String, remember: Bool) -> NSURLSessionDataTask? {
-        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let session = NSURLSession(configuration: config)
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://usb2c-qa.knowre.com/api/landing/loginEmail")!)
-        
-        let jsonString = "{  \"email\": \"\(username)\", \"password\" : \"\(password)\", \"rememberMe\" : \(String(remember)) }"
-        let parameters = ["input":jsonString]
-        
-        do {
-            request.setValue("application/json", forHTTPHeaderField: "Accept")
-            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            
-            request.HTTPMethod = "POST"
-            request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(parameters, options: .PrettyPrinted)
-            
-            return session.dataTaskWithRequest(request) { (data, response, error) -> Void in
-                if let e = error {
-                    print(e.localizedDescription)
-                } else {
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        self.parseData(data!)
-                    })
+        SessionManager.sharedManager.beginSession()
+        SessionManager.sharedManager.completion = { data in
+            do {
+                let dic = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) as! NSDictionary
+                if dic["success"]! as! Bool == true {
+                    ViewControllerManager.sharedManager.switchToViewController(ViewControllerType.Logout)
                 }
+            } catch {
+                print("Data is not a dictionary type")
             }
-        } catch {
-            print("Abort session due to input data error")
-            return nil
+            
+            SessionManager.sharedManager.endSession()
         }
-    }
-    
-    func parseData(data: NSData) {
-        do {
-            let dic = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) as! NSDictionary
-            if dic["success"]! as! Bool == true {
-                ViewControllerManager.sharedManager.switchToViewController(ViewControllerType.Logout)
-            }
-        } catch {
-            print("Data is not a dictionary type")
+        let response = SessionManager.sharedManager.loginDataTaskWithUsername(usernameField.text!, password: passwordField.text!, remember: true)
+        
+        if let task = response.dataTask {
+            task.resume()
+        } else {
+            print(response.errorMessage!)
         }
     }
     
