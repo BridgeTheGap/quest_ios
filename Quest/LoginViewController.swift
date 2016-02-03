@@ -13,63 +13,21 @@ class LoginViewController: UIViewController {
     weak var passwordField: UITextField!
     weak var loginButton: UIButton!
     
+    override func loadView() {
+        let view = LoginView(inputField: true, buttonTitle: "Submit")
+        
+        self.view = view
+        
+        usernameField = view.usernameField
+        passwordField = view.passwordField
+        loginButton = view.submitButton
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.whiteColor()
-        
-        // usernameField
-        let usernameField = UITextField()
-        usernameField.translatesAutoresizingMaskIntoConstraints = false
-        usernameField.autocapitalizationType = .None
-        usernameField.autocorrectionType = .No
-        usernameField.backgroundColor = UIColor.init(white: 0.95, alpha: 1)
-        usernameField.placeholder = "account"
-        usernameField.returnKeyType = .Next
-        
-        self.view.addSubview(usernameField)
-        self.usernameField = usernameField
-        
-        // passwordField
-        let passwordField = UITextField()
-        passwordField.translatesAutoresizingMaskIntoConstraints = false
-        passwordField.autocapitalizationType = .None
-        passwordField.autocorrectionType = .No
-        passwordField.backgroundColor = UIColor.init(white: 0.95, alpha: 1)
-        passwordField.placeholder = "password"
-        passwordField.returnKeyType = .Done
-        passwordField.secureTextEntry = true
-        
-        self.view.addSubview(passwordField)
-        self.passwordField = passwordField
-        
-        // loginButton
-        let loginButton = UIButton()
-        loginButton.translatesAutoresizingMaskIntoConstraints = false
         loginButton.addTarget(self, action: "loginButtonAction:", forControlEvents: .TouchUpInside)
-        loginButton.backgroundColor = UIColor.init(white: 0.95, alpha: 1)
-        loginButton.setTitle("submit", forState: .Normal)
-        loginButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
         
-        self.view.addSubview(loginButton)
-        self.loginButton = loginButton
-        
-        // Add and set constraints
-        self.view.addConstraint(NSLayoutConstraint(item: usernameField, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 120.0))
-        self.view.addConstraint(NSLayoutConstraint(item: usernameField, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 44.0))
-        self.view.addConstraint(NSLayoutConstraint(item: usernameField, attribute: .CenterX, relatedBy: .Equal, toItem: self.view, attribute: .CenterX, multiplier: 1, constant: 0))
-        self.view.addConstraint(NSLayoutConstraint(item: passwordField, attribute: .Top, relatedBy: .Equal, toItem: usernameField, attribute: .Bottom, multiplier: 1, constant: 8))
-        
-        self.view.addConstraint(NSLayoutConstraint(item: passwordField, attribute: .Width, relatedBy: .Equal, toItem: usernameField, attribute: .Width, multiplier: 1, constant: 0))
-        self.view.addConstraint(NSLayoutConstraint(item: passwordField, attribute: .Height, relatedBy: .Equal, toItem: usernameField, attribute: .Height, multiplier: 1, constant: 0))
-        self.view.addConstraint(NSLayoutConstraint(item: passwordField, attribute: .CenterX, relatedBy: .Equal, toItem: self.view, attribute: .CenterX, multiplier: 1, constant: 0))
-        self.view.addConstraint(NSLayoutConstraint(item: passwordField, attribute: .Bottom, relatedBy: .Equal, toItem: self.view, attribute: .CenterY, multiplier: 1, constant: 0))
-        
-        self.view.addConstraint(NSLayoutConstraint(item: loginButton, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 120.0))
-        self.view.addConstraint(NSLayoutConstraint(item: loginButton, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 44.0))
-        self.view.addConstraint(NSLayoutConstraint(item: loginButton, attribute: .CenterX, relatedBy: .Equal, toItem: self.view, attribute: .CenterX, multiplier: 1, constant: 0))
-        self.view.addConstraint(NSLayoutConstraint(item: loginButton, attribute: .Top, relatedBy: .Equal, toItem: self.view, attribute: .CenterY, multiplier: 1, constant: 45))
-
         // FIXME: Remove in real code
         usernameField.text = "quest1"
         passwordField.text = "quest1"
@@ -78,11 +36,6 @@ class LoginViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        usernameField.text = ""
-        passwordField.text = ""
     }
     
     // MARK: Target action
