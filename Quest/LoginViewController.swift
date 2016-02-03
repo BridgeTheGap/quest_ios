@@ -40,7 +40,6 @@ class LoginViewController: UIViewController {
     
     // MARK: Target action
     func loginButtonAction(sender: AnyObject) {
-        // FIXME: Uncomment later
         // Check for valid user input
         if usernameField.text!.isEmpty || passwordField.text!.isEmpty {
             let alert = UIAlertController(title: "Cannot Login", message: "Please type in your username and password", preferredStyle: .Alert)

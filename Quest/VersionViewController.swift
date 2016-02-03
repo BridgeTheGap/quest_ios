@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  VersionViewController.swift
 //  Quest
 //
 //  Created by Joshua Park on 1/27/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class VersionViewController: UIViewController {
     weak var checkButton: UIButton!
     weak var textView: UITextView!
 

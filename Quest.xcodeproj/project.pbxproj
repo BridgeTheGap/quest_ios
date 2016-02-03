@@ -14,7 +14,7 @@
 		D173BA7F1C60AE9D00FABB30 /* LogoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D173BA7E1C60AE9D00FABB30 /* LogoutViewController.swift */; };
 		D173BA821C61D67900FABB30 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D173BA811C61D67900FABB30 /* LoginView.swift */; };
 		D1DA65AA1C5843B30038983D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DA65A91C5843B30038983D /* AppDelegate.swift */; };
-		D1DA65AC1C5843B30038983D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DA65AB1C5843B30038983D /* ViewController.swift */; };
+		D1DA65AC1C5843B30038983D /* VersionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DA65AB1C5843B30038983D /* VersionViewController.swift */; };
 		D1DA65AF1C5843B30038983D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1DA65AD1C5843B30038983D /* Main.storyboard */; };
 		D1DA65B11C5843B30038983D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1DA65B01C5843B30038983D /* Assets.xcassets */; };
 		D1DA65B41C5843B30038983D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1DA65B21C5843B30038983D /* LaunchScreen.storyboard */; };
@@ -29,7 +29,7 @@
 		D173BA811C61D67900FABB30 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		D1DA65A61C5843B30038983D /* Quest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Quest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1DA65A91C5843B30038983D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D1DA65AB1C5843B30038983D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D1DA65AB1C5843B30038983D /* VersionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionViewController.swift; sourceTree = "<group>"; };
 		D1DA65AE1C5843B30038983D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D1DA65B01C5843B30038983D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D1DA65B31C5843B30038983D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -98,10 +98,10 @@
 			children = (
 				D173BA801C61D62200FABB30 /* View */,
 				D1DA65A91C5843B30038983D /* AppDelegate.swift */,
-				D1DA65AB1C5843B30038983D /* ViewController.swift */,
 				D173BA7A1C609F7500FABB30 /* ViewControllerManager.swift */,
 				D173BA7C1C60A5B400FABB30 /* LoginViewController.swift */,
 				D173BA7E1C60AE9D00FABB30 /* LogoutViewController.swift */,
+				D1DA65AB1C5843B30038983D /* VersionViewController.swift */,
 				D126E1CF1C5EDE860036DDCB /* VersionManager.swift */,
 				D1DA65AD1C5843B30038983D /* Main.storyboard */,
 				D1DA65B01C5843B30038983D /* Assets.xcassets */,
@@ -236,7 +236,7 @@
 			files = (
 				D173BA7B1C609F7500FABB30 /* ViewControllerManager.swift in Sources */,
 				D173BA821C61D67900FABB30 /* LoginView.swift in Sources */,
-				D1DA65AC1C5843B30038983D /* ViewController.swift in Sources */,
+				D1DA65AC1C5843B30038983D /* VersionViewController.swift in Sources */,
 				D126E1D01C5EDE860036DDCB /* VersionManager.swift in Sources */,
 				D173BA7D1C60A5B400FABB30 /* LoginViewController.swift in Sources */,
 				D173BA7F1C60AE9D00FABB30 /* LogoutViewController.swift in Sources */,
