@@ -51,12 +51,15 @@ class LoginViewController: UIViewController {
             return
         }
         
+        // Session manager: begin session
         SessionManager.sharedManager.beginSession()
         SessionManager.sharedManager.completion = { data in
             do {
                 let dic = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) as! NSDictionary
                 if dic["success"]! as! Bool == true {
-                    ViewControllerManager.sharedManager.switchToViewController(ViewControllerType.Logout)
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        ViewControllerManager.sharedManager.switchToViewController(ViewControllerType.Logout)
+                    })
                 }
             } catch {
                 print("Data is not a dictionary type")

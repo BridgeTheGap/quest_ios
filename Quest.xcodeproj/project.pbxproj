@@ -74,9 +74,9 @@
 			children = (
 				D173BA811C61D67900FABB30 /* LoginView.swift */,
 				D173BA7A1C609F7500FABB30 /* ViewControllerManager.swift */,
+				D11838DB1C61F9AD00ABFAA2 /* SessionManager.swift */,
 				D173BA7C1C60A5B400FABB30 /* LoginViewController.swift */,
 				D173BA7E1C60AE9D00FABB30 /* LogoutViewController.swift */,
-				D11838DB1C61F9AD00ABFAA2 /* SessionManager.swift */,
 			);
 			name = Login;
 			sourceTree = "<group>";

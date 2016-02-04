@@ -24,6 +24,7 @@ class LoginView: UIView {
         self.backgroundColor = UIColor.whiteColor()
         
         if inputField {
+            // usernameField
             usernameField.translatesAutoresizingMaskIntoConstraints = false
             usernameField.autocapitalizationType = .None
             usernameField.autocorrectionType = .No

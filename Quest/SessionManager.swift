@@ -13,7 +13,7 @@ let LOGIN_URL = NSURL(string: "https://usb2c-qa.knowre.com/api/landing/loginEmai
 class SessionManager: NSObject {
     static let sharedManager = SessionManager()
     var session: NSURLSession?
-    var completion: ((data: NSData) -> Void)?
+    var completion: ((NSData) -> Void)?
     
     func beginSession() {
         session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
@@ -44,9 +44,7 @@ class SessionManager: NSObject {
                 if let e = error {
                     print(e.localizedDescription)
                 } else {
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        self.completion!(data: data!)
-                    })
+                    self.completion!(data!)
                 }
             }), nil)
         } catch {
