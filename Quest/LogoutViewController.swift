@@ -24,6 +24,7 @@ class LogoutViewController: UIViewController {
         logoutButton.addTarget(self, action: "logoutButtonAction:", forControlEvents: .TouchUpInside)
     }
     
+    // MARK: Target action
     func logoutButtonAction(sender: UIButton) {
         ViewControllerManager.sharedManager.switchToViewController(ViewControllerType.Login)
     }
