@@ -53,6 +53,8 @@ class LoginViewController: UIViewController {
         
         // Session manager: begin session
         SessionManager.sharedManager.beginSession()
+        
+        // Completion: If data task is successful with a response, switch to logout view controller
         SessionManager.sharedManager.completion = { data in
             do {
                 let dic = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) as! NSDictionary
