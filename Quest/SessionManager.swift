@@ -12,52 +12,68 @@ enum TaskType: String {
     case Login = "https://usb2c-qa.knowre.com/api/landing/loginEmail"
 }
 
-class SessionManager: NSObject {
+class SessionManager: NSObject, NSURLSessionDataDelegate {
     static let sharedManager = SessionManager()
     var session: NSURLSession?
-    var completion: ((NSData) -> Void)?
-    
-    func beginSession() {
-        session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
-    }
-    
-    func beginSessionWithConfiguration(configuration: NSURLSessionConfiguration, delegate: NSURLSessionDelegate?, delegateQueue: NSOperationQueue?) {
-        session = NSURLSession(configuration: configuration, delegate: delegate, delegateQueue: delegateQueue)
-    }
-    
-    func dataTask(task: TaskType, username: String, password: String, remember: Bool) -> (dataTask: NSURLSessionDataTask?, errorMessage: String?) {
-        if session == nil {
-            return (nil, "Begin session by calling -beginSessionWithConfiguration(_, delegate)")
+    var data: NSData? {
+        // Observe property change
+        willSet {
+            print("Received data from request and updating property")
         }
-        
-        switch task {
-        case .Login:
-            let request = NSMutableURLRequest(URL: NSURL(string: task.rawValue)!)
-            
-            let jsonString = "{  \"email\": \"\(username)\", \"password\" : \"\(password)\", \"rememberMe\" : \(String(remember)) }"
-            let parameters = ["input":jsonString]
-            
+        didSet {
             do {
-                request.setValue("application/json", forHTTPHeaderField: "Accept")
-                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-                
-                request.HTTPMethod = "POST"
-                request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(parameters, options: .PrettyPrinted)
-                
-                return (session!.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
-                    if let e = error {
-                        print(e.localizedDescription)
-                    } else {
-                        self.completion!(data!)
-                    }
-                }), nil)
+                let dic = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments) as! NSDictionary
+                if dic["success"]! as! Bool == true {
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        ViewControllerManager.sharedManager.switchToViewController(ViewControllerType.Logout)
+                    })
+                }
             } catch {
-                return (nil, "Abort session due to input data error")
+                print("Data is not JSON type.")
             }
         }
     }
     
-    func endSession() {
+    // MARK: Public
+    func loginWithUsername(username: String,  password: String, remember: Bool) {
+        beginSession()
+        let request = NSMutableURLRequest(URL: NSURL(string: TaskType.Login.rawValue)!)
+        
+        let jsonString = "{  \"email\": \"\(username)\", \"password\" : \"\(password)\", \"rememberMe\" : \(String(remember)) }"
+        let parameters = ["input":jsonString]
+        
+        do {
+            request.setValue("application/json", forHTTPHeaderField: "Accept")
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            request.HTTPMethod = "POST"
+            request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(parameters, options: .PrettyPrinted)
+            
+            let dataTask = session!.dataTaskWithRequest(request)
+            dataTask.resume()
+        } catch {
+            print("Abort session due to input data error")
+        }
+    }
+    
+    // MARK: Private
+    private func beginSession() {
+        session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration(), delegate: self, delegateQueue: NSOperationQueue.mainQueue())
+    }
+    
+    private func endSession() {
         session = nil
+    }
+    
+    // MARK: URLSessionDataDelegate
+    @objc internal func URLSession(session: NSURLSession, task: NSURLSessionTask, didCompleteWithError error: NSError?) {
+        if let e = error {
+            print(e.localizedDescription)
+        }
+    }
+    
+    @objc internal func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveData data: NSData) {
+        self.data = data
+        endSession()
     }
 }

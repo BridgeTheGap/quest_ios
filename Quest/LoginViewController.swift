@@ -51,31 +51,8 @@ class LoginViewController: UIViewController {
             return
         }
         
-        // Session manager: begin session
-        SessionManager.sharedManager.beginSession()
-        
-        // Completion: If data task is successful with a response, switch to logout view controller
-        SessionManager.sharedManager.completion = { data in
-            do {
-                let dic = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) as! NSDictionary
-                if dic["success"]! as! Bool == true {
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        ViewControllerManager.sharedManager.switchToViewController(ViewControllerType.Logout)
-                    })
-                }
-            } catch {
-                print("Data is not a dictionary type")
-            }
-            
-            SessionManager.sharedManager.endSession()
-        }
-        let tuples = SessionManager.sharedManager.dataTask(.Login, username: usernameField.text!, password: passwordField.text!, remember: true)
-        
-        if let task = tuples.dataTask {
-            task.resume()
-        } else {
-            print(tuples.errorMessage!)
-        }
+        // Session manager: login
+        SessionManager.sharedManager.loginWithUsername(usernameField.text!, password: passwordField.text!, remember: true)
     }
     
     deinit {
