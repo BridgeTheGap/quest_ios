@@ -67,12 +67,12 @@ class LoginViewController: UIViewController {
             
             SessionManager.sharedManager.endSession()
         }
-        let response = SessionManager.sharedManager.loginDataTaskWithUsername(usernameField.text!, password: passwordField.text!, remember: true)
+        let tuples = SessionManager.sharedManager.dataTask(.Login, username: usernameField.text!, password: passwordField.text!, remember: true)
         
-        if let task = response.dataTask {
+        if let task = tuples.dataTask {
             task.resume()
         } else {
-            print(response.errorMessage!)
+            print(tuples.errorMessage!)
         }
     }
     
