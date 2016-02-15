@@ -15,10 +15,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Configure tracker from GoogleService-info.plist
-        var configureError: NSError?
-        GGLContext.sharedInstance().configureWithError(&configureError)
-        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        
+        #if RELEASE
+            // Configure tracker from GoogleService-info.plist
+            var configureError: NSError?
+            GGLContext.sharedInstance().configureWithError(&configureError)
+            assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        #endif
         
         return true
     }
