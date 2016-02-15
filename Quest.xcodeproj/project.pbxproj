@@ -14,6 +14,7 @@
 		D173BA7D1C60A5B400FABB30 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D173BA7C1C60A5B400FABB30 /* LoginViewController.swift */; };
 		D173BA7F1C60AE9D00FABB30 /* LogoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D173BA7E1C60AE9D00FABB30 /* LogoutViewController.swift */; };
 		D173BA821C61D67900FABB30 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D173BA811C61D67900FABB30 /* LoginView.swift */; };
+		D1A18BB01C7154E000A8CC37 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1A18BAF1C7154E000A8CC37 /* GoogleService-Info.plist */; };
 		D1DA65AA1C5843B30038983D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DA65A91C5843B30038983D /* AppDelegate.swift */; };
 		D1DA65AC1C5843B30038983D /* VersionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DA65AB1C5843B30038983D /* VersionViewController.swift */; };
 		D1DA65AF1C5843B30038983D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1DA65AD1C5843B30038983D /* Main.storyboard */; };
@@ -29,6 +30,8 @@
 		D173BA7C1C60A5B400FABB30 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D173BA7E1C60AE9D00FABB30 /* LogoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutViewController.swift; sourceTree = "<group>"; };
 		D173BA811C61D67900FABB30 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		D1A18BAF1C7154E000A8CC37 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D1A18BB21C7155ED00A8CC37 /* Quest-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Quest-Bridging-Header.h"; sourceTree = "<group>"; };
 		D1DA65A61C5843B30038983D /* Quest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Quest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1DA65A91C5843B30038983D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D1DA65AB1C5843B30038983D /* VersionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionViewController.swift; sourceTree = "<group>"; };
@@ -110,6 +113,8 @@
 				D1DA65B01C5843B30038983D /* Assets.xcassets */,
 				D1DA65B21C5843B30038983D /* LaunchScreen.storyboard */,
 				D1DA65B51C5843B30038983D /* Info.plist */,
+				D1A18BAF1C7154E000A8CC37 /* GoogleService-Info.plist */,
+				D1A18BB21C7155ED00A8CC37 /* Quest-Bridging-Header.h */,
 			);
 			path = Quest;
 			sourceTree = "<group>";
@@ -177,6 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1DA65B41C5843B30038983D /* LaunchScreen.storyboard in Resources */,
+				D1A18BB01C7154E000A8CC37 /* GoogleService-Info.plist in Resources */,
 				D1DA65B11C5843B30038983D /* Assets.xcassets in Resources */,
 				D1DA65AF1C5843B30038983D /* Main.storyboard in Resources */,
 			);
@@ -362,9 +368,11 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Quest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.KR.Quest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Debug;
 		};
@@ -377,9 +385,11 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Quest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) -D RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.KR.Quest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Quest/Quest-Bridging-Header.h";
 			};
 			name = Release;
 		};
