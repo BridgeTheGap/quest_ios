@@ -44,7 +44,7 @@ class LoginViewController: UIViewController {
         // Google analytics only for release
         #if RELEASE
             print("LOGIN: Release mode")
-            let loginEvent = GAIDictionaryBuilder.createEventWithCategory("user_action", action: "login_tap", label: nil, value: nil).build() as [NSObject: AnyObject]
+            let loginEvent = GAIDictionaryBuilder.createEventWithCategory("user_action", action: "tap_login", label: nil, value: nil).build() as [NSObject: AnyObject]
             GAI.sharedInstance().defaultTracker.send(loginEvent)
         #endif
         

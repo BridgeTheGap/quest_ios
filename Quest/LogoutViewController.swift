@@ -30,7 +30,7 @@ class LogoutViewController: UIViewController {
         // Google Analytics only for release
         #if RELEASE
             print("LOGOUT: Release mode")
-            let logoutEvent = GAIDictionaryBuilder.createEventWithCategory("user_action", action: "logout", label: nil, value: nil).build() as [NSObject: AnyObject]
+            let logoutEvent = GAIDictionaryBuilder.createEventWithCategory("user_action", action: "tap_login", label: nil, value: nil).build() as [NSObject: AnyObject]
             GAI.sharedInstance().defaultTracker.send(logoutEvent)
         #endif
         
