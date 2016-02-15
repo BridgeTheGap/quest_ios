@@ -3,4 +3,5 @@ use_frameworks!
 
 target 'Quest' do
     pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
+    pod 'Google/Analytics'
 end
