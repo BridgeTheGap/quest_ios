@@ -25,16 +25,6 @@ class LogoutViewController: UIViewController {
         logoutButton.addTarget(self, action: "logoutButtonAction:", forControlEvents: .TouchUpInside)
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        let tracker = GAI.sharedInstance().defaultTracker
-        tracker.set(kGAIScreenName, value: "Logout")
-        
-        let builder = GAIDictionaryBuilder.createScreenView()
-        tracker.send(builder.build() as [NSObject: AnyObject])
-    }
-    
     // MARK: Target action
     func logoutButtonAction(sender: UIButton) {
         // Google Analytics only for release
