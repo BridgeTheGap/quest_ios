@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Google
 
 class LoginViewController: UIViewController {
     weak var usernameField: UITextField!
@@ -33,6 +34,16 @@ class LoginViewController: UIViewController {
         passwordField.text = "quest1"
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: "Login")
+        
+        let builder = GAIDictionaryBuilder.createScreenView()
+        tracker.send(builder.build() as [NSObject: AnyObject])
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -40,6 +51,13 @@ class LoginViewController: UIViewController {
     
     // MARK: Target action
     func loginButtonAction(sender: AnyObject) {
+        // Google analytics only for release
+        #if RELEASE
+            print("LOGIN: Release mode")
+            let loginEvent = GAIDictionaryBuilder.createEventWithCategory("user_action", action: "login_tap", label: nil, value: nil).build() as [NSObject: AnyObject]
+            GAI.sharedInstance().defaultTracker.send(loginEvent)
+        #endif
+        
         // Check for valid user input
         if usernameField.text!.isEmpty || passwordField.text!.isEmpty {
             let alert = UIAlertController(title: "Cannot Login", message: "Please type in your username and password", preferredStyle: .Alert)
